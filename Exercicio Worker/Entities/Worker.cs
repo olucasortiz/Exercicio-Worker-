@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Exercicio_Worker.Entities.Enums;
 
 namespace Exercicio_Worker.Entities
@@ -11,11 +8,14 @@ namespace Exercicio_Worker.Entities
     {
         public string Name { get; set; }
         public WorkerLevel Level { get; set; }
-        public double BaseSalary {  get; set; }
+        public double BaseSalary { get; set; }
         public Department Department { get; set; }
         public List<HourContract> Contracts { get; set; }
 
-        public Worker() { }
+        public Worker()
+        {
+            Contracts = new List<HourContract>(); // Inicialização no construtor sem parâmetros
+        }
 
         public Worker(string name, WorkerLevel level, double baseSalary, Department department)
         {
@@ -23,6 +23,7 @@ namespace Exercicio_Worker.Entities
             Level = level;
             BaseSalary = baseSalary;
             Department = department;
+            Contracts = new List<HourContract>(); // Inicialização no construtor com parâmetros
         }
 
         public void addContract(HourContract contract)
@@ -30,23 +31,22 @@ namespace Exercicio_Worker.Entities
             Contracts.Add(contract);
         }
 
-        public void removeContract(HourContract contract) 
+        public void removeContract(HourContract contract)
         {
-                Contracts.Remove(contract); 
+            Contracts.Remove(contract);
         }
 
         public double Income(int year, int month)
         {
             double sum = BaseSalary;
-            foreach (HourContract contract in Contracts)//percorrer a lista
+            foreach (HourContract contract in Contracts) // percorrer a lista
             {
-                if(contract.Data.Year == year && contract.Data.Month == month)
+                if (contract.Data.Year == year && contract.Data.Month == month)
                 {
-                    sum = sum + contract.TotalValue();
+                    sum += contract.TotalValue();
                 }
             }
             return sum;
         }
-        
     }
 }

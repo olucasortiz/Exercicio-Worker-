@@ -9,7 +9,7 @@ namespace Exercicio_Worker.Entities.Enums
     enum WorkerLevel
     {
         Junior = 0,
-        MidLevel = 1,
+        Midlevel = 1,
         Senior = 2
     }
 }
